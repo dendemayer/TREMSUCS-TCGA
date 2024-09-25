@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -41,7 +41,8 @@ of the TCGA-projects for revealing Biomarkers which indicate treatment success.<
 <section id="example-report">
 <h2>Example report:<a class="headerlink" href="#example-report" title="Link to this heading">¶</a></h2>
 <p>An example report can be downloaded <a class="reference external" href="https://media.githubusercontent.com/media/dendemayer/TREMSUCS-TCGA/main/suppl/report.html?download=true">here</a>.
-Be aware that this report has a size of about 300 MB.</p>
+[<a class="reference external" href="https://media.githubusercontent.com/media/dendemayer/TREMSUCS-TCGA/main/suppl/report.html?download=true">https://media.githubusercontent.com/media/dendemayer/TREMSUCS-TCGA/main/suppl/report.html?download=true</a>]</p>
+<p>Be aware that this report has a size of about 300 MB.</p>
 </section>
 <section id="installing-from-github-com">
 <h2>Installing from github.com:<a class="headerlink" href="#installing-from-github-com" title="Link to this heading">¶</a></h2>
@@ -70,6 +71,9 @@ of the TCGA-projects for revealing Biomarkers which indicate threapy
 specific treatment success predictions.</p>
 <p>Calling the pipeline without any argument starts the interactive mode to
 help setting all needed parameters for the analysis.</p>
+<p>To recreate the analysis published you can run:
+TREMSUCS -p TCGA-CESC -p TCGA-HNSC -p TCGA-LUSC -d carboplatin -d carboplatin,paclitaxel -d cisplatin -C 0 -C 5 -C 8 -t 0 -t 5 -t 10 -t 20 -o /your_output_path -c 40</p>
+<p>Note that -c gives the number of cores which should fit your environment</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>TREMSUCS<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
 </div>
@@ -111,7 +115,10 @@ help setting all needed parameters for the analysis.</p>
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-TREMSUCS-C">
 <span id="cmdoption-TREMSUCS-cutoff"></span><span class="sig-name descname"><span class="pre">-C</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--cutoff</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;cutoff&gt;</span></span><a class="headerlink" href="#cmdoption-TREMSUCS-C" title="Link to this definition">¶</a></dt>
-<dd><p>Cut-off parameter</p>
+<dd><p>Cut-off parameter. Enter none, one or several like: -C 5 -C 8</p>
+<p>you can estimate an appropriate cutoff value by  running your analysis wtih default cutoff and
+checking out the created report html for the survival time distribution.</p>
+<p>See man TREMSUCS for further clarification of the Cutoff parameter</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p>
@@ -122,7 +129,13 @@ help setting all needed parameters for the analysis.</p>
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-TREMSUCS-t">
 <span id="cmdoption-TREMSUCS-threshold"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--threshold</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;threshold&gt;</span></span><a class="headerlink" href="#cmdoption-TREMSUCS-t" title="Link to this definition">¶</a></dt>
-<dd><p>threshold parameter</p>
+<dd><p>threshold parameter. Enter none, one or several like: -t 5 -t 10</p>
+<blockquote>
+<div><p>It is advised for the user not to exceed a threshold value of 20 since it is
+unlikely to gain any significance for the survival analysis with an exaggerated exclusion
+of patients.</p>
+</div></blockquote>
+<p>See man TREMSUCS for further clarification of the threshold parameter</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p>
@@ -294,10 +307,8 @@ default OUTPUT_PATH can be confirmed or replaced:</p>
 if so, press ENTER, if not, enter your custom output path:
 </pre></div>
 </div>
-<dl class="simple">
-<dt>In this example, we confirm the suggested OUTPUT_PATH and are asked to confirm</dt><dd><p>or set the number of cores which shall be invoked into the analyses:</p>
-</dd>
-</dl>
+<p>In this example, we confirm the suggested OUTPUT_PATH and are asked to confirm
+or set the number of cores which shall be invoked into the analyses:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>do you want to keep the default number of cores invoked of 1?
 if so, press ENTER, if not, enter the number of cores:
 40
@@ -346,6 +357,102 @@ press ENTER to start or q to quit:
 <p>If something went wrong, you can quit now and start over, or of course start the analysis.</p>
 </section>
 </section>
+<section id="the-cutoff-and-threshold-parameter">
+<h2>The cutoff and threshold parameter:<a class="headerlink" href="#the-cutoff-and-threshold-parameter" title="Link to this heading">¶</a></h2>
+<section id="cutoff">
+<h3>Cutoff:<a class="headerlink" href="#cutoff" title="Link to this heading">¶</a></h3>
+<p>The cutoff parameter can be used to replace the vital status classification
+with a classification based on a minimum survival time.  If the parameter is
+set, patients are assigned to a group depending on whether or not they survived
+longer then the specified value.  In figure 1 an example is given for patients
+out of CESC, HNSC and LUSC without any limitation to treatment. With a cutoff
+of 8 years, 3 dead patients are grouped with the alive cohort (Figure 2).
+Applying a cutoff of 5 groups an additional 7 dead cases to the alive cohort
+(Figure 3). This parameter is applied before the analysis steps. It is possible
+to apply multiple cutoff values to one run.
+The alteration of the survival data of just a few patients can have a
+noticeable impact on the overall outcomes, but it should not exceed the maximum
+value of the survivaltime of the dead patients cohort, since then no change
+would be propagated. To figure out an appropriate custom value,
+you can first run the analysis with the default cutoff and refer to the
+created report. Within the patient_overview section, the survival data of
+the given cohort is shown. On the basis on the data plotted there, a second run
+can be started with a custom cutoff of interest. Already created results will
+not be overwritten but incorporated with the new ones based on the chosen
+cutoff. The final ranking gives then the same aggregation as if both, the
+default and the custom cutoff would have been started together, since the
+default is always calculated and incorporated within the analysis.
+The custom cutoff should also make medically sense, e.g., stating that an
+survivaltime of one year shall be categorized as treatment success makes little
+sense and would not enhance the significance of the final results.</p>
+<figure class="align-default" id="id4">
+<img alt="Default Cutoff 0" src="_images/cutoff_default.svg" />
+<figcaption>
+<p><span class="caption-text">Figure 1: Dead and alive grouping without a cutoff (default).</span><a class="headerlink" href="#id4" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id5">
+<img alt="Default Cutoff 8" src="_images/cutoff_with_8.svg" />
+<figcaption>
+<p><span class="caption-text">Figure 2: Dead and alive grouping with a cutoff of 8.</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id6">
+<img alt="Default Cutoff 5" src="_images/cutoff_with_5.svg" />
+<figcaption>
+<p><span class="caption-text">Figure 3: Dead and alive grouping without a of 5.</span><a class="headerlink" href="#id6" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="threshold">
+<h3>Threshold:<a class="headerlink" href="#threshold" title="Link to this heading">¶</a></h3>
+<p>The threshold parameter facilitates a modulation in the validation steps.
+Each previously identified marker, either a differentially methylated
+position or a differentially expressed gene of each patient, is grouped
+into the UP or DOWN regulated set depending on the mean of medians of all
+values. In the following, the Kaplan Meier estimations for each of these
+two groups are calculated. Incorporating values close to the mean of
+medians might be detrimental to the significance of the survival
+analyses. With the threshold, an upper and lower bound around the mean of
+medians is calculated (figure 4) and patient-data between those boundaries is
+excluded from the survival analysis. Here, the threshold gives the
+distance of the bounds from the mean of medians in percent of the mean of
+medians.</p>
+<p>It is advised for the user not to exceed a threshold value of 20
+since it is unlikely to gain any significance for the survival analysis with
+an exaggerated exclusion of patients.</p>
+<figure class="align-default" id="id8">
+<a class="reference internal image-reference" href="_images/standalone_subfigure6-crop.svg"><img alt="threshold" src="_images/standalone_subfigure6-crop.svg" style="width: 838.0px; height: 1284.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 4:
+Threshold example for ENSG00000204187. The panels on the left side
+show the exclusion of patients which are linked to the data in between
+the threshold bounds. On the right side the belonging Kaplan Meier plot
+is shown.</span><a class="headerlink" href="#id8" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>In figure 5, the survival p-values of the 10 most
+significant genes for patients from the TCGA-CESC cohort with the
+therapeutic combination of carboplatin, carboplatin and paclitaxel
+(combined) and cisplatin are shown. With increasing threshold,
+incrementally improvement of the p-value for ENSG00000204187 (emphasized in
+red) is visible together with a higher difference of the life expectancies.
+Increasing the threshold will lower the size of the data base for p-value
+estimation, which can also result in increasing p-values. In figure
+5, an example is the gene ENSG00000204832
+emphasized in green.</p>
+<figure class="align-default" id="id10">
+<a class="reference internal image-reference" href="_images/standalone_subfigure7-crop.svg"><img alt="threshold" src="_images/standalone_subfigure7-crop.svg" style="width: 638.4000000000001px; height: 512.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure 5: Survival p-values and mean life differences for the first 10
+most significant genes found by DESeq2, gathered from base plots, with
+a cutoff of 0. Succession of ENSGs is genomic coordinate wise.</span><a class="headerlink" href="#id10" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
 </section>
 
 
@@ -353,7 +460,7 @@ press ENTER to start or q to quit:
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="#">Table of Contents</a></h3>
@@ -367,6 +474,11 @@ press ENTER to start or q to quit:
 </li>
 <li><a class="reference internal" href="#short-tutorial">Short tutorial:</a><ul>
 <li><a class="reference internal" href="#usage-of-the-interactive-mode">Usage of the interactive mode:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-cutoff-and-threshold-parameter">The cutoff and threshold parameter:</a><ul>
+<li><a class="reference internal" href="#cutoff">Cutoff:</a></li>
+<li><a class="reference internal" href="#threshold">Threshold:</a></li>
 </ul>
 </li>
 </ul>
@@ -395,7 +507,7 @@ press ENTER to start or q to quit:
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -406,8 +518,8 @@ press ENTER to start or q to quit:
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-    &#169; Copyright 2024, Gabor Balogh.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    &#169; Copyright 2024, Gabor Balogh, gabor@bioinf.uni-leipzig.de.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     </div>
   </body>
 </html>

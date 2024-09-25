@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "TREMSUCS" "1" "Jun 20, 2024" "" "TREMSUCS"
+.TH "TREMSUCS" "1" "Sep 25, 2024" "" "TREMSUCS"
 .SH NAME
 tremsucs \- TREMSUCS 1.0
 .sp
@@ -36,6 +36,8 @@ of the TCGA\-projects for revealing Biomarkers which indicate treatment success.
 .SH EXAMPLE REPORT:
 .sp
 An example report can be downloaded \X'tty: link https://media.githubusercontent.com/media/dendemayer/TREMSUCS-TCGA/main/suppl/report.html?download=true'\fI\%here\fP\X'tty: link'\&.
+[\X'tty: link https://media.githubusercontent.com/media/dendemayer/TREMSUCS-TCGA/main/suppl/report.html?download=true'\fI\%https://media.githubusercontent.com/media/dendemayer/TREMSUCS\-TCGA/main/suppl/report.html?download=true\fP\X'tty: link']
+.sp
 Be aware that this report has a size of about 300 MB.
 .SH INSTALLING FROM GITHUB.COM:
 .INDENT 0.0
@@ -79,6 +81,11 @@ specific treatment success predictions.
 .sp
 Calling the pipeline without any argument starts the interactive mode to
 help setting all needed parameters for the analysis.
+.sp
+To recreate the analysis published you can run:
+TREMSUCS \-p TCGA\-CESC \-p TCGA\-HNSC \-p TCGA\-LUSC \-d carboplatin \-d carboplatin,paclitaxel \-d cisplatin \-C 0 \-C 5 \-C 8 \-t 0 \-t 5 \-t 10 \-t 20 \-o /your_output_path \-c 40
+.sp
+Note that \-c gives the number of cores which should fit your environment
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -122,7 +129,12 @@ number of cores provided to snakemake
 .INDENT 0.0
 .TP
 .B \-C, \-\-cutoff <cutoff>
-Cut\-off parameter
+Cut\-off parameter. Enter none, one or several like: \-C 5 \-C 8
+.sp
+you can estimate an appropriate cutoff value by  running your analysis wtih default cutoff and
+checking out the created report html for the survival time distribution.
+.sp
+See man TREMSUCS for further clarification of the Cutoff parameter
 .INDENT 7.0
 .TP
 .B Default
@@ -132,7 +144,16 @@ Cut\-off parameter
 .INDENT 0.0
 .TP
 .B \-t, \-\-threshold <threshold>
-threshold parameter
+threshold parameter. Enter none, one or several like: \-t 5 \-t 10
+.INDENT 7.0
+.INDENT 3.5
+It is advised for the user not to exceed a threshold value of 20 since it is
+unlikely to gain any significance for the survival analysis with an exaggerated exclusion
+of patients.
+.UNINDENT
+.UNINDENT
+.sp
+See man TREMSUCS for further clarification of the threshold parameter
 .INDENT 7.0
 .TP
 .B Default
@@ -320,11 +341,9 @@ if so, press ENTER, if not, enter your custom output path:
 .EE
 .UNINDENT
 .UNINDENT
-.INDENT 0.0
-.TP
-.B In this example, we confirm the suggested OUTPUT_PATH and are asked to confirm
+.sp
+In this example, we confirm the suggested OUTPUT_PATH and are asked to confirm
 or set the number of cores which shall be invoked into the analyses:
-.UNINDENT
 .INDENT 0.0
 .INDENT 3.5
 .sp
@@ -401,9 +420,65 @@ press ENTER to start or q to quit:
 .UNINDENT
 .sp
 If something went wrong, you can quit now and start over, or of course start the analysis.
+.SH THE CUTOFF AND THRESHOLD PARAMETER:
+.SS Cutoff:
+.sp
+The cutoff parameter can be used to replace the vital status classification
+with a classification based on a minimum survival time.  If the parameter is
+set, patients are assigned to a group depending on whether or not they survived
+longer then the specified value.  In figure 1 an example is given for patients
+out of CESC, HNSC and LUSC without any limitation to treatment. With a cutoff
+of 8 years, 3 dead patients are grouped with the alive cohort (Figure 2).
+Applying a cutoff of 5 groups an additional 7 dead cases to the alive cohort
+(Figure 3). This parameter is applied before the analysis steps. It is possible
+to apply multiple cutoff values to one run.
+The alteration of the survival data of just a few patients can have a
+noticeable impact on the overall outcomes, but it should not exceed the maximum
+value of the survivaltime of the dead patients cohort, since then no change
+would be propagated. To figure out an appropriate custom value,
+you can first run the analysis with the default cutoff and refer to the
+created report. Within the patient_overview section, the survival data of
+the given cohort is shown. On the basis on the data plotted there, a second run
+can be started with a custom cutoff of interest. Already created results will
+not be overwritten but incorporated with the new ones based on the chosen
+cutoff. The final ranking gives then the same aggregation as if both, the
+default and the custom cutoff would have been started together, since the
+default is always calculated and incorporated within the analysis.
+The custom cutoff should also make medically sense, e.g., stating that an
+survivaltime of one year shall be categorized as treatment success makes little
+sense and would not enhance the significance of the final results.
+.SS Threshold:
+.sp
+The threshold parameter facilitates a modulation in the validation steps.
+Each previously identified marker, either a differentially methylated
+position or a differentially expressed gene of each patient, is grouped
+into the UP or DOWN regulated set depending on the mean of medians of all
+values. In the following, the Kaplan Meier estimations for each of these
+two groups are calculated. Incorporating values close to the mean of
+medians might be detrimental to the significance of the survival
+analyses. With the threshold, an upper and lower bound around the mean of
+medians is calculated (figure 4) and patient\-data between those boundaries is
+excluded from the survival analysis. Here, the threshold gives the
+distance of the bounds from the mean of medians in percent of the mean of
+medians.
+.sp
+It is advised for the user not to exceed a threshold value of 20
+since it is unlikely to gain any significance for the survival analysis with
+an exaggerated exclusion of patients.
+.sp
+In figure 5, the survival p\-values of the 10 most
+significant genes for patients from the TCGA\-CESC cohort with the
+therapeutic combination of carboplatin, carboplatin and paclitaxel
+(combined) and cisplatin are shown. With increasing threshold,
+incrementally improvement of the p\-value for ENSG00000204187 (emphasized in
+red) is visible together with a higher difference of the life expectancies.
+Increasing the threshold will lower the size of the data base for p\-value
+estimation, which can also result in increasing p\-values. In figure
+5, an example is the gene ENSG00000204832
+emphasized in green.
 .SH AUTHOR
 Gabor Balogh
 .SH COPYRIGHT
-2024, Gabor Balogh
+2024, Gabor Balogh, gabor@bioinf.uni-leipzig.de
 .\" Generated by docutils manpage writer.
 .

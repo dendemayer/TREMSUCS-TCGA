@@ -40,10 +40,17 @@ HOME = os.getenv('HOME')
               type=int, help='number of cores provided to snakemake',
               required=False)
 @click.option('--cutoff', '-C', default=[0], multiple=True, show_default=True,
-              type=float, help='Cut-off parameter',
+              type=float, help='''Cut-off parameter. Enter none, one or several like: -C 5 -C 8\n
+              You can estimate an appropriate cutoff value by  running your analysis wtih default cutoff and
+              checking out the created report html for the survival time distribution.
+              See man TREMSUCS for further clarification of the Cutoff parameter''',
               required=False)
 @click.option('--threshold', '-t', default=[0], multiple=True, show_default=True,
-              type=float, help='threshold parameter',
+              type=float, help='''threshold parameter. Enter none, one or several like: -t 5 -t 10\n
+              It is advised for the user not to exceed a threshold value of 20 since it is
+              unlikely to gain any significance for the survival analysis with an exaggerated exclusion
+              of patients.
+              See man TREMSUCS for further clarification of the threshold parameter''',
               required=False)
 @click.option('--execute', '-e', default=pipeline_list, multiple=True,
               show_default=True, help='choose which pipeline shall be executed')
@@ -77,6 +84,11 @@ def call_with_options(out_path, project, drugs, cores, execute, cutoff,
 
     Calling the pipeline without any argument starts the interactive mode to
     help setting all needed parameters for the analysis.
+
+    To recreate the analysis published you can run:
+    TREMSUCS -p TCGA-CESC -p TCGA-HNSC -p TCGA-LUSC -d carboplatin -d carboplatin,paclitaxel -d cisplatin -C 0 -C 5 -C 8 -t 0 -t 5 -t 10 -t 20 -o /your_output_path -c 40
+
+    Note that -c gives the number of cores which should fit your environment
     '''
     OUTPUT_PATH = out_path
     # print("\nOUTPUT_PATH:\t\t", OUTPUT_PATH)

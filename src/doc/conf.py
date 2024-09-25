@@ -22,7 +22,7 @@ sys.path.append(os.path.join(os.path.pardir))
 # -- Project information -----------------------------------------------------
 
 project = 'TREMSUCS'
-copyright = '2024, Gabor Balogh'
+copyright = '2024, Gabor Balogh, gabor@bioinf.uni-leipzig.de'
 author = 'Gabor Balogh'
 
 # The full version, including alpha/beta/rc tags

@@ -12,6 +12,8 @@ Example report:
 ---------------
 
 An example report can be downloaded here_.
+[https://media.githubusercontent.com/media/dendemayer/TREMSUCS-TCGA/main/suppl/report.html?download=true]
+
 Be aware that this report has a size of about 300 MB.
 
 .. _here: https://media.githubusercontent.com/media/dendemayer/TREMSUCS-TCGA/main/suppl/report.html?download=true
@@ -167,7 +169,7 @@ default OUTPUT_PATH can be confirmed or replaced:
     if so, press ENTER, if not, enter your custom output path:                       
                                                                                  
 In this example, we confirm the suggested OUTPUT_PATH and are asked to confirm
-   or set the number of cores which shall be invoked into the analyses:
+or set the number of cores which shall be invoked into the analyses:
 
 .. code-block:: text
 
@@ -229,3 +231,146 @@ set with that and are finally listed before the whole approach is started:
     press ENTER to start or q to quit:                                               
 
 If something went wrong, you can quit now and start over, or of course start the analysis.
+
+The cutoff and threshold parameter:
+-----------------------------------
+Cutoff:
+^^^^^^^
+
+The cutoff parameter can be used to replace the vital status classification
+with a classification based on a minimum survival time.  If the parameter is
+set, patients are assigned to a group depending on whether or not they survived
+longer then the specified value.  In figure 1 an example is given for patients
+out of CESC, HNSC and LUSC without any limitation to treatment. With a cutoff
+of 8 years, 3 dead patients are grouped with the alive cohort (Figure 2).
+Applying a cutoff of 5 groups an additional 7 dead cases to the alive cohort
+(Figure 3). This parameter is applied before the analysis steps. It is possible
+to apply multiple cutoff values to one run.
+The alteration of the survival data of just a few patients can have a
+noticeable impact on the overall outcomes, but it should not exceed the maximum
+value of the survivaltime of the dead patients cohort, since then no change
+would be propagated. To figure out an appropriate custom value, 
+you can first run the analysis with the default cutoff and refer to the
+created report. Within the patient_overview section, the survival data of
+the given cohort is shown. On the basis on the data plotted there, a second run
+can be started with a custom cutoff of interest. Already created results will
+not be overwritten but incorporated with the new ones based on the chosen
+cutoff. The final ranking gives then the same aggregation as if both, the
+default and the custom cutoff would have been started together, since the
+default is always calculated and incorporated within the analysis.
+The custom cutoff should also make medically sense, e.g., stating that an
+survivaltime of one year shall be categorized as treatment success makes little
+sense and would not enhance the significance of the final results.
+
+.. only:: latex
+
+    .. figure:: _images/cutoff_default.pdf
+        :scale: 80 %
+        :alt: Default Cutoff 0
+
+        Dead and alive grouping without a cutoff (default).
+
+    .. figure:: _images/cutoff_with_8.pdf
+        :scale: 80 %
+        :alt: Default Cutoff 8
+
+        Dead and alive grouping with a cutoff of 8.
+
+    .. figure:: _images/cutoff_with_5.pdf
+        :scale: 80 %
+        :alt: Default Cutoff 5
+
+        Dead and alive grouping without a of 5.
+
+.. only:: html
+
+    .. figure:: _images/cutoff_default.svg
+        :alt: Default Cutoff 0
+
+        Figure 1: Dead and alive grouping without a cutoff (default).
+
+    .. figure:: _images/cutoff_with_8.svg
+        :alt: Default Cutoff 8
+
+        Figure 2: Dead and alive grouping with a cutoff of 8.
+
+    .. figure:: _images/cutoff_with_5.svg
+        :alt: Default Cutoff 5
+
+        Figure 3: Dead and alive grouping without a of 5.
+
+Threshold:
+^^^^^^^^^^
+
+The threshold parameter facilitates a modulation in the validation steps.
+Each previously identified marker, either a differentially methylated
+position or a differentially expressed gene of each patient, is grouped
+into the UP or DOWN regulated set depending on the mean of medians of all
+values. In the following, the Kaplan Meier estimations for each of these
+two groups are calculated. Incorporating values close to the mean of
+medians might be detrimental to the significance of the survival
+analyses. With the threshold, an upper and lower bound around the mean of
+medians is calculated (figure 4) and patient-data between those boundaries is
+excluded from the survival analysis. Here, the threshold gives the
+distance of the bounds from the mean of medians in percent of the mean of
+medians.
+
+It is advised for the user not to exceed a threshold value of 20
+since it is unlikely to gain any significance for the survival analysis with
+an exaggerated exclusion of patients.
+
+.. only:: latex
+
+    .. figure:: _images/standalone_subfigure6-crop.pdf
+        :scale: 80 %
+        :alt: threshold
+
+        Threshold example for ENSG00000204187. The panels on the left side
+        show the exclusion of patients which are linked to the data in between
+        the threshold bounds. On the right side the belonging Kaplan Meier plot
+        is shown. 
+
+.. only:: html
+
+    .. figure:: _images/standalone_subfigure6-crop.svg
+        :alt: threshold
+        :scale: 200 %
+
+        Figure 4: 
+        Threshold example for ENSG00000204187. The panels on the left side
+        show the exclusion of patients which are linked to the data in between
+        the threshold bounds. On the right side the belonging Kaplan Meier plot
+        is shown. 
+
+In figure 5, the survival p-values of the 10 most
+significant genes for patients from the TCGA-CESC cohort with the
+therapeutic combination of carboplatin, carboplatin and paclitaxel
+(combined) and cisplatin are shown. With increasing threshold,
+incrementally improvement of the p-value for ENSG00000204187 (emphasized in
+red) is visible together with a higher difference of the life expectancies.
+Increasing the threshold will lower the size of the data base for p-value
+estimation, which can also result in increasing p-values. In figure
+5, an example is the gene ENSG00000204832
+emphasized in green.
+
+.. only:: latex
+
+    .. figure:: _images/standalone_subfigure7-crop.pdf
+        :scale: 80 %
+        :alt: threshold
+
+        Survival p-values and mean life differences for the first 10
+        most significant genes found by DESeq2, gathered from base plots, with
+        a cutoff of 0. Succession of ENSGs is genomic coordinate wise.  
+
+.. only:: html
+
+    .. figure:: _images/standalone_subfigure7-crop.svg
+        :alt: threshold
+        :scale: 160 %
+
+        Figure 5: Survival p-values and mean life differences for the first 10
+        most significant genes found by DESeq2, gathered from base plots, with
+        a cutoff of 0. Succession of ENSGs is genomic coordinate wise.  
+
+
