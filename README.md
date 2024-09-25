@@ -57,8 +57,23 @@ Options:
   -d, --drugs TEXT       drug(s), like: -d drug1 -d drug2 or  
                          drugcombination(s), like: -d drug1,drug2  
   -c, --cores INTEGER    number of cores provided to snakemake  [default: 1]  
-  -C, --cutoff FLOAT     Cut-off parameter  [default: 0]  
-  -t, --threshold FLOAT  threshold parameter  [default: 0]  
+  -C, --cutoff FLOAT     Cut-off parameter. Enter none, one or several like:
+                         -C 5 -C 8
+                         
+                         You can estimate an appropriate cutoff value by
+                         running your analysis wtih default cutoff and
+                         checking out the created report html for the survival
+                         time distribution. See man TREMSUCS for further
+                         clarification of the Cutoff parameter  [default: 0]
+  -t, --threshold FLOAT  threshold parameter. Enter none, one or several like:
+                         -t 5 -t 10
+                         
+                         It is advised for the user not to exceed a threshold
+                         value of 20 since it is unlikely to gain any
+                         significance for the survival analysis with an
+                         exaggerated exclusion of patients. See man TREMSUCS
+                         for further clarification of the threshold parameter
+                         [default: 0]
   -e, --execute TEXT     choose which pipeline shall be executed  [default:  
                          DESeq2, metilene]  
   -N, --dryrun           snakemake dryrun  
