@@ -321,7 +321,7 @@ an exaggerated exclusion of patients.
 
 .. only:: latex
 
-    .. figure:: _images/standalone_subfigure6-crop.pdf
+    .. figure:: _images/standalone_subfigure.pdf
         :scale: 80 %
         :alt: threshold
 
@@ -332,7 +332,7 @@ an exaggerated exclusion of patients.
 
 .. only:: html
 
-    .. figure:: _images/standalone_subfigure6-crop.svg
+    .. figure:: _images/standalone_subfigure.svg
         :alt: threshold
         :scale: 200 %
 

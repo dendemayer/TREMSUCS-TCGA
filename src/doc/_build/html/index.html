@@ -84,7 +84,7 @@ TREMSUCS -p TCGA-CESC -p TCGA-HNSC -p TCGA-LUSC -d carboplatin -d carboplatin,pa
 <dd><p>path to save the result files</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'/home/dende/TREMSUCS'</span></code></p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">/homes/biertruck/gabor/TREMSUCS</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -116,9 +116,9 @@ TREMSUCS -p TCGA-CESC -p TCGA-HNSC -p TCGA-LUSC -d carboplatin -d carboplatin,pa
 <dt class="sig sig-object std" id="cmdoption-TREMSUCS-C">
 <span id="cmdoption-TREMSUCS-cutoff"></span><span class="sig-name descname"><span class="pre">-C</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--cutoff</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;cutoff&gt;</span></span><a class="headerlink" href="#cmdoption-TREMSUCS-C" title="Link to this definition">¶</a></dt>
 <dd><p>Cut-off parameter. Enter none, one or several like: -C 5 -C 8</p>
-<p>you can estimate an appropriate cutoff value by  running your analysis wtih default cutoff and
-checking out the created report html for the survival time distribution.</p>
-<p>See man TREMSUCS for further clarification of the Cutoff parameter</p>
+<p>You can estimate an appropriate cutoff value by  running your analysis wtih default cutoff and
+checking out the created report html for the survival time distribution.
+See man TREMSUCS for further clarification of the Cutoff parameter</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p>
@@ -130,12 +130,10 @@ checking out the created report html for the survival time distribution.</p>
 <dt class="sig sig-object std" id="cmdoption-TREMSUCS-t">
 <span id="cmdoption-TREMSUCS-threshold"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--threshold</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;threshold&gt;</span></span><a class="headerlink" href="#cmdoption-TREMSUCS-t" title="Link to this definition">¶</a></dt>
 <dd><p>threshold parameter. Enter none, one or several like: -t 5 -t 10</p>
-<blockquote>
-<div><p>It is advised for the user not to exceed a threshold value of 20 since it is
+<p>It is advised for the user not to exceed a threshold value of 20 since it is
 unlikely to gain any significance for the survival analysis with an exaggerated exclusion
-of patients.</p>
-</div></blockquote>
-<p>See man TREMSUCS for further clarification of the threshold parameter</p>
+of patients.
+See man TREMSUCS for further clarification of the threshold parameter</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p>
@@ -149,7 +147,7 @@ of patients.</p>
 <dd><p>choose which pipeline shall be executed</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'DESeq2',</span> <span class="pre">'metilene'</span></code></p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">DESeq2,</span> <span class="pre">metilene</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -422,8 +420,7 @@ medians.</p>
 since it is unlikely to gain any significance for the survival analysis with
 an exaggerated exclusion of patients.</p>
 <figure class="align-default" id="id8">
-<a class="reference internal image-reference" href="_images/standalone_subfigure6-crop.svg"><img alt="threshold" src="_images/standalone_subfigure6-crop.svg" style="width: 838.0px; height: 1284.0px;" />
-</a>
+<a class="reference internal image-reference" href="_images/standalone_subfigure.svg"><img alt="threshold" src="_images/standalone_subfigure.svg" style="width: 1106.0px; height: 1766.0px;" /></a>
 <figcaption>
 <p><span class="caption-text">Figure 4:
 Threshold example for ENSG00000204187. The panels on the left side
@@ -443,8 +440,7 @@ estimation, which can also result in increasing p-values. In figure
 5, an example is the gene ENSG00000204832
 emphasized in green.</p>
 <figure class="align-default" id="id10">
-<a class="reference internal image-reference" href="_images/standalone_subfigure7-crop.svg"><img alt="threshold" src="_images/standalone_subfigure7-crop.svg" style="width: 638.4000000000001px; height: 512.0px;" />
-</a>
+<a class="reference internal image-reference" href="_images/standalone_subfigure7-crop.svg"><img alt="threshold" src="_images/standalone_subfigure7-crop.svg" style="width: 638.4000000000001px; height: 512.0px;" /></a>
 <figcaption>
 <p><span class="caption-text">Figure 5: Survival p-values and mean life differences for the first 10
 most significant genes found by DESeq2, gathered from base plots, with
