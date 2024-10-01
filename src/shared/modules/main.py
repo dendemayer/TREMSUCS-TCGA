@@ -41,7 +41,7 @@ HOME = os.getenv('HOME')
               required=False)
 @click.option('--cutoff', '-C', default=[0], multiple=True, show_default=True,
               type=float, help='''Cut-off parameter. Enter none, one or several like: -C 5 -C 8\n
-              You can estimate an appropriate cutoff value by  running your analysis wtih default cutoff and
+              You can estimate an appropriate cutoff value by running your analysis with default cutoff and
               checking out the created report html for the survival time distribution.
               See man TREMSUCS for further clarification of the Cutoff parameter''',
               required=False)

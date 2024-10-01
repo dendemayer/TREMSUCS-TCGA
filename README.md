@@ -64,7 +64,7 @@ Options:
                          -C 5 -C 8
                          
                          You can estimate an appropriate cutoff value by
-                         running your analysis wtih default cutoff and
+                         running your analysis with default cutoff and
                          checking out the created report html for the survival
                          time distribution. See man TREMSUCS for further
                          clarification of the Cutoff parameter  [default: 0]
