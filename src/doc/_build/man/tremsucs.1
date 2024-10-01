@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "TREMSUCS" "1" "Sep 26, 2024" "" "TREMSUCS"
+.TH "TREMSUCS" "1" "Oct 01, 2024" "" "TREMSUCS"
 .SH NAME
 tremsucs \- TREMSUCS 1.0
 .sp
@@ -43,13 +43,11 @@ Be aware that this report has a size of about 300 MB.
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ git clone https://github.com/dendemayer/TREMSUCS\-TCGA.git
 $ cd TREMSUCS\-TCGA
 $ pip install .
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -58,11 +56,9 @@ without any argument:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ TREMSUCS
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -70,12 +66,10 @@ Calling the help or the manual page:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ TREMSUCS \-\-help
 $ man TREMSUCS
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .SH HELP PAGE OF THE PIPELINE:
@@ -95,11 +89,9 @@ Note that \-c gives the number of cores which should fit your environment
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 TREMSUCS [OPTIONS]
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -111,7 +103,7 @@ path to save the result files
 .INDENT 7.0
 .TP
 .B Default
-\fB/homes/biertruck/gabor/TREMSUCS\fP
+\fB\(aq/home/dende/TREMSUCS\(aq\fP
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -170,7 +162,7 @@ choose which pipeline shall be executed
 .INDENT 7.0
 .TP
 .B Default
-\fBDESeq2, metilene\fP
+\fB\(aqDESeq2\(aq, \(aqmetilene\(aq\fP
 .UNINDENT
 .UNINDENT
 .INDENT 0.0
@@ -223,12 +215,10 @@ number of cores hereby can be adjusted and would also give the same results):
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ TREMSUCS \-p TCGA\-CESC \-p TCGA\-HNSC \-p TCGA\-LUSC \-d cisplatin \-d carboplatin,paclitaxel \e
 \-d carboplatin \-o /scr/TREMSUCS_out \-c 40 \-t 5 \-t 10 \-t 20 \-C 5 \-C 8
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -236,8 +226,7 @@ Calling the pipeline without any argument starts the interactive mode:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 $ TREMSUCS
 
  OUTPUT_PATH:             /homes/biertruck/gabor/TREMSUCS
@@ -279,8 +268,7 @@ $ TREMSUCS
  30:     TCGA\-UCS            uterine carcinoma
  31:     TCGA\-CHOL           cholangiocarcinoma
  enter your choices one by one, when you are done, simply press \(dqEnter\(dq:
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -294,8 +282,7 @@ afterwards the following prompt is given:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 you choose:
 PROJECTS:        [\(aqTCGA\-CESC\(aq, \(aqTCGA\-HNSC\(aq, \(aqTCGA\-LUSC\(aq]
 
@@ -330,8 +317,7 @@ which therapy approach do you want to include in your analysis:
 26: gemcitabine                              TCGA\-CESC: 0 TCGA\-HNSC: 0 TCGA\-LUSC: 2
 
 enter your choices one by one, when you are done, simply press \(dqEnter\(dq:
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -343,13 +329,11 @@ default OUTPUT_PATH can be confirmed or replaced:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 do you want to keep the default OUTPUT_PATH of:
 /homes/biertruck/gabor/TREMSUCS
 if so, press ENTER, if not, enter your custom output path:
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -358,13 +342,11 @@ or set the number of cores which shall be invoked into the analyses:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 do you want to keep the default number of cores invoked of 1?
 if so, press ENTER, if not, enter the number of cores:
 40
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -374,14 +356,12 @@ produced:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 which pipeline do you want to include into your analysis
 press ENTER if DESeq2 and metilene (default) or
 1 for DESeq2 or
 2 for metilene
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -390,15 +370,13 @@ we want to add those at all:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 do you want to add one or multiple cutoffs?
 it is recommend to choose cutoff values between 5 and 10 years
 if not, just press ENTER, if so enter the coutoffs one by one:
 5
 8
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -407,16 +385,14 @@ requested:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 do you want to add one or multiple thresholds?
 it is recommend to choose threshold values which do not exceed a value of 50
 if not, just press ENTER, if so enter the thresholds one by one:
 5
 10
 20
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
@@ -425,8 +401,7 @@ set with that and are finally listed before the whole approach is started:
 .INDENT 0.0
 .INDENT 3.5
 .sp
-.nf
-.ft C
+.EX
 OUTPUT_PATH:             /homes/biertruck/gabor/TREMSUCS
 PROJECT:                 [\(aqTCGA\-CESC\(aq, \(aqTCGA\-HNSC\(aq, \(aqTCGA\-LUSC\(aq]
 DRUGS:                   [\(aqcarboplatin\(aq, \(aqcarboplatin,paclitaxel\(aq, \(aqcisplatin\(aq]
@@ -435,8 +410,7 @@ cores:                  40
 cutoff:                 [0, 5, 8]
 threshold:              [0, 5, 10, 20]
 press ENTER to start or q to quit:
-.ft P
-.fi
+.EE
 .UNINDENT
 .UNINDENT
 .sp
