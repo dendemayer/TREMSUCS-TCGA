@@ -7,7 +7,10 @@ of the TCGA-projects for revealing Biomarkers which indicate treatment success.
 [Documentation](https://dendemayer.github.io/TREMSUCS-TCGA/#)  
 ## an example Report html file can be downloaded here:  
 [example Report download link](https://media.githubusercontent.com/media/dendemayer/TREMSUCS-TCGA/main/suppl/report.html?download=true).  
-This report file has a size of about 300 MB.
+This report file has a size of about 300 MB.  
+Due to the large size of the report it is recommend to download it first before
+exploration, but a direct link for your browser is given here:  
+[direct link for browser](https://www.bioinf.uni-leipzig.de/~gabor/report.html).  
 
 # installing from github.com:
 ```bash

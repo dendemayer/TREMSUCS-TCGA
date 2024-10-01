@@ -43,6 +43,7 @@ of the TCGA-projects for revealing Biomarkers which indicate treatment success.<
 <p>An example report can be downloaded <a class="reference external" href="https://media.githubusercontent.com/media/dendemayer/TREMSUCS-TCGA/main/suppl/report.html?download=true">here</a>.
 [<a class="reference external" href="https://media.githubusercontent.com/media/dendemayer/TREMSUCS-TCGA/main/suppl/report.html?download=true">https://media.githubusercontent.com/media/dendemayer/TREMSUCS-TCGA/main/suppl/report.html?download=true</a>]</p>
 <p>Be aware that this report has a size of about 300 MB.</p>
+<p>View the report directly within your browser: <a class="reference external" href="https://www.bioinf.uni-leipzig.de/~gabor/report.html">there</a>.</p>
 </section>
 <section id="installing-from-github-com">
 <h2>Installing from github.com:<a class="headerlink" href="#installing-from-github-com" title="Link to this heading">¶</a></h2>
@@ -84,7 +85,7 @@ TREMSUCS -p TCGA-CESC -p TCGA-HNSC -p TCGA-LUSC -d carboplatin -d carboplatin,pa
 <dd><p>path to save the result files</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">/homes/biertruck/gabor/TREMSUCS</span></code></p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'/home/dende/TREMSUCS'</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -147,7 +148,7 @@ See man TREMSUCS for further clarification of the threshold parameter</p>
 <dd><p>choose which pipeline shall be executed</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">DESeq2,</span> <span class="pre">metilene</span></code></p>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'DESeq2',</span> <span class="pre">'metilene'</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -420,7 +421,8 @@ medians.</p>
 since it is unlikely to gain any significance for the survival analysis with
 an exaggerated exclusion of patients.</p>
 <figure class="align-default" id="id8">
-<a class="reference internal image-reference" href="_images/standalone_subfigure.svg"><img alt="threshold" src="_images/standalone_subfigure.svg" style="width: 1106.0px; height: 1766.0px;" /></a>
+<a class="reference internal image-reference" href="_images/standalone_subfigure.svg"><img alt="threshold" src="_images/standalone_subfigure.svg" style="width: 1106.0px; height: 1766.0px;" />
+</a>
 <figcaption>
 <p><span class="caption-text">Figure 4:
 Threshold example for ENSG00000204187. The panels on the left side
@@ -440,7 +442,8 @@ estimation, which can also result in increasing p-values. In figure
 5, an example is the gene ENSG00000204832
 emphasized in green.</p>
 <figure class="align-default" id="id10">
-<a class="reference internal image-reference" href="_images/standalone_subfigure7-crop.svg"><img alt="threshold" src="_images/standalone_subfigure7-crop.svg" style="width: 638.4000000000001px; height: 512.0px;" /></a>
+<a class="reference internal image-reference" href="_images/standalone_subfigure7-crop.svg"><img alt="threshold" src="_images/standalone_subfigure7-crop.svg" style="width: 638.4000000000001px; height: 512.0px;" />
+</a>
 <figcaption>
 <p><span class="caption-text">Figure 5: Survival p-values and mean life differences for the first 10
 most significant genes found by DESeq2, gathered from base plots, with

@@ -18,6 +18,10 @@ Be aware that this report has a size of about 300 MB.
 
 .. _here: https://media.githubusercontent.com/media/dendemayer/TREMSUCS-TCGA/main/suppl/report.html?download=true
 
+View the report directly within your browser: there_.
+
+.. _there: https://www.bioinf.uni-leipzig.de/~gabor/report.html
+
 Installing from github.com:
 ------------------------------------------
 
