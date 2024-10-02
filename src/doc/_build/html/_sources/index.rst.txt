@@ -160,11 +160,13 @@ afterwards the following prompt is given:
 
     enter your choices one by one, when you are done, simply press "Enter": 
 
-Here are therapies listed where the maximum of a row is greater than 1. We
-apply row 0, 1 and 3 to include cisplatin, the combination of carboplatin and
-paclitaxel and cases which got solely treated with carboplatin. In the
-following, every other parameter is requested. With the next prompt, the
-default OUTPUT_PATH can be confirmed or replaced:
+List of therapies with at least 2 patients. We apply row 0, 1 and 3 to include
+cisplatin, the combination of carboplatin and paclitaxel and cases which got
+solely treated with carboplatin. In the following, every other parameter is
+requested. 
+
+With the next prompt, the default OUTPUT_PATH can be confirmed or
+replaced:
 
 .. code-block:: text
     

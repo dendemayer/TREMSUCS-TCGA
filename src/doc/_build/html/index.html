@@ -116,8 +116,8 @@ TREMSUCS -p TCGA-CESC -p TCGA-HNSC -p TCGA-LUSC -d carboplatin -d carboplatin,pa
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-TREMSUCS-C">
 <span id="cmdoption-TREMSUCS-cutoff"></span><span class="sig-name descname"><span class="pre">-C</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--cutoff</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;cutoff&gt;</span></span><a class="headerlink" href="#cmdoption-TREMSUCS-C" title="Link to this definition">¶</a></dt>
-<dd><p>Cut-off parameter. Enter none, one or several like: -C 5 -C 8</p>
-<p>You can estimate an appropriate cutoff value by  running your analysis wtih default cutoff and
+<dd><p>Cut-off parameter. Set minimum survival for positive outcome. If 0, compares dead to alive patients. Enter none, one or several like: -C 5 -C 8</p>
+<p>You can estimate an appropriate cutoff value by running your analysis with default cutoff and
 checking out the created report html for the survival time distribution.
 See man TREMSUCS for further clarification of the Cutoff parameter</p>
 <dl class="field-list simple">
@@ -130,7 +130,7 @@ See man TREMSUCS for further clarification of the Cutoff parameter</p>
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-TREMSUCS-t">
 <span id="cmdoption-TREMSUCS-threshold"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--threshold</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;threshold&gt;</span></span><a class="headerlink" href="#cmdoption-TREMSUCS-t" title="Link to this definition">¶</a></dt>
-<dd><p>threshold parameter. Enter none, one or several like: -t 5 -t 10</p>
+<dd><p>Threshold parameter. Exlude all patients within threshold % of the pivot from analysis to get better group separation. Enter none, one or several like: -t 5 -t 10</p>
 <p>It is advised for the user not to exceed a threshold value of 20 since it is
 unlikely to gain any significance for the survival analysis with an exaggerated exclusion
 of patients.
@@ -296,11 +296,12 @@ which therapy approach do you want to include in your analysis:
 enter your choices one by one, when you are done, simply press &quot;Enter&quot;:
 </pre></div>
 </div>
-<p>Here are therapies listed where the maximum of a row is greater than 1. We
-apply row 0, 1 and 3 to include cisplatin, the combination of carboplatin and
-paclitaxel and cases which got solely treated with carboplatin. In the
-following, every other parameter is requested. With the next prompt, the
-default OUTPUT_PATH can be confirmed or replaced:</p>
+<p>List of therapies with at least 2 patients. We apply row 0, 1 and 3 to include
+cisplatin, the combination of carboplatin and paclitaxel and cases which got
+solely treated with carboplatin. In the following, every other parameter is
+requested.</p>
+<p>With the next prompt, the default OUTPUT_PATH can be confirmed or
+replaced:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>do you want to keep the default OUTPUT_PATH of:
 /homes/biertruck/gabor/TREMSUCS
 if so, press ENTER, if not, enter your custom output path:

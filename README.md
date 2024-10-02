@@ -53,14 +53,15 @@ Usage: TREMSUCS [OPTIONS]
   help setting all needed parameters for the analysis.  
   
 Options:  
-  -o, --out_path TEXT    path to save the result files  [default:  
-                         /homes/biertruck/gabor/TREMSUCS]  
+  -o, --out_path TEXT    path to save the result files  [default:
+                         $HOME/user/TREMSUCS]  
   -p, --project TEXT     TCGA project(s) to be applied. Any TCGA project can  
                          be chosen, like: -p TCGA-CESC -p TCGA-HNSC ...  
   -d, --drugs TEXT       drug(s), like: -d drug1 -d drug2 or  
                          drugcombination(s), like: -d drug1,drug2  
   -c, --cores INTEGER    number of cores provided to snakemake  [default: 1]  
-  -C, --cutoff FLOAT     Cut-off parameter. Enter none, one or several like:
+  -C, --cutoff FLOAT     Cut-off parameter, set minimum survival for positive
+                         outcome. Enter none, one or several like:
                          -C 5 -C 8
                          
                          You can estimate an appropriate cutoff value by

@@ -40,13 +40,13 @@ HOME = os.getenv('HOME')
               type=int, help='number of cores provided to snakemake',
               required=False)
 @click.option('--cutoff', '-C', default=[0], multiple=True, show_default=True,
-              type=float, help='''Cut-off parameter. Enter none, one or several like: -C 5 -C 8\n
+              type=float, help='''Cut-off parameter. Set minimum survival for positive outcome. If 0, compares dead to alive patients. Enter none, one or several like: -C 5 -C 8\n
               You can estimate an appropriate cutoff value by running your analysis with default cutoff and
               checking out the created report html for the survival time distribution.
               See man TREMSUCS for further clarification of the Cutoff parameter''',
               required=False)
 @click.option('--threshold', '-t', default=[0], multiple=True, show_default=True,
-              type=float, help='''threshold parameter. Enter none, one or several like: -t 5 -t 10\n
+              type=float, help='''Threshold parameter. Exlude all patients within threshold % of the pivot from analysis to get better group separation. Enter none, one or several like: -t 5 -t 10\n
               It is advised for the user not to exceed a threshold value of 20 since it is
               unlikely to gain any significance for the survival analysis with an exaggerated exclusion
               of patients.
