@@ -171,7 +171,7 @@ replaced:
 .. code-block:: text
     
     do you want to keep the default OUTPUT_PATH of:                                  
-    /homes/biertruck/gabor/TREMSUCS                                                  
+    ~/TREMSUCS 
     if so, press ENTER, if not, enter your custom output path:                       
                                                                                  
 In this example, we confirm the suggested OUTPUT_PATH and are asked to confirm

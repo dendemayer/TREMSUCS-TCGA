@@ -134,16 +134,3 @@ src/tcga_deseq/resources/.Rhistory
 src/tcga_deseq/.snakemake/
 src/shared/dag.pdf
 src/tcga_deseq/scripts/create_deseq_output_temp.py
-src/doc/_build/latex/sphinx.xdy
-src/doc/_build/latex/sphinxlatextables.sty
-src/doc/_build/latex/sphinxpackagesubstitutefont.sty
-src/doc/_build/latex/standalone_subfigure.pdf
-src/doc/_build/latex/tremsucs.aux
-src/doc/_build/latex/tremsucs.fdb_latexmk
-src/doc/_build/latex/tremsucs.fls
-src/doc/_build/latex/tremsucs.idx
-src/doc/_build/latex/tremsucs.ilg
-src/doc/_build/latex/tremsucs.ind
-src/doc/_build/latex/tremsucs.out
-src/doc/_build/latex/tremsucs.tex
-src/doc/_build/latex/tremsucs.toc

@@ -54,7 +54,7 @@ Usage: TREMSUCS [OPTIONS]
   
 Options:  
   -o, --out_path TEXT    path to save the result files  [default:
-                         $HOME/user/TREMSUCS]  
+                         ~/TREMSUCS]  
   -p, --project TEXT     TCGA project(s) to be applied. Any TCGA project can  
                          be chosen, like: -p TCGA-CESC -p TCGA-HNSC ...  
   -d, --drugs TEXT       drug(s), like: -d drug1 -d drug2 or  
