@@ -43,34 +43,42 @@ TREMSUCS -p TCGA-HNSC -p TCGA-CESC -p TCGA-LUSC -d cisplatin -d carboplatin,pacl
 - content of help page:  
 
 ```
-Usage: TREMSUCS [OPTIONS]  
-  
-  "TREMSUCS" a tool to choose, harvest and analyse expression and methylation  
-  data of the TCGA-projects for revealing Biomarkers which indicate treatment  
-  success predictions.  
-  
-  Calling the pipeline without any argument starts the interactive mode to  
-  help setting all needed parameters for the analysis.  
-  
-Options:  
+Usage: TREMSUCS [OPTIONS]
+
+  "TREMSUCS" a tool to choose, harvest and analyse expression and methylation
+  data of the TCGA-projects for revealing Biomarkers which indicate threapy
+  specific treatment success predictions.
+
+  Calling the pipeline without any argument starts the interactive mode to
+  help setting all needed parameters for the analysis.
+
+  To recreate the analysis published you can run: TREMSUCS -p TCGA-CESC -p
+  TCGA-HNSC -p TCGA-LUSC -d carboplatin -d carboplatin,paclitaxel -d cisplatin
+  -C 0 -C 5 -C 8 -t 0 -t 5 -t 10 -t 20 -o /your_output_path -c 40
+
+  Note that -c gives the number of cores which should fit your environment
+
+Options:
   -o, --out_path TEXT    path to save the result files  [default:
-                         ~/TREMSUCS]  
-  -p, --project TEXT     TCGA project(s) to be applied. Any TCGA project can  
-                         be chosen, like: -p TCGA-CESC -p TCGA-HNSC ...  
-  -d, --drugs TEXT       drug(s), like: -d drug1 -d drug2 or  
-                         drugcombination(s), like: -d drug1,drug2  
-  -c, --cores INTEGER    number of cores provided to snakemake  [default: 1]  
-  -C, --cutoff FLOAT     Cut-off parameter, set minimum survival for positive
-                         outcome. Enter none, one or several like:
-                         -C 5 -C 8
+                         /home/dende/TREMSUCS]
+  -p, --project TEXT     TCGA project(s) to be applied. Any TCGA project can
+                         be chosen, like: -p TCGA-CESC -p TCGA-HNSC ...
+  -d, --drugs TEXT       drug(s), like: -d drug1 -d drug2 or
+                         drugcombination(s), like: -d drug1,drug2
+  -c, --cores INTEGER    number of cores provided to snakemake  [default: 1]
+  -C, --cutoff FLOAT     Cut-off parameter. Set minimum survival for positive
+                         outcome. If 0, compares dead to alive patients. Enter
+                         none, one or several like: -C 5 -C 8
                          
                          You can estimate an appropriate cutoff value by
                          running your analysis with default cutoff and
                          checking out the created report html for the survival
                          time distribution. See man TREMSUCS for further
                          clarification of the Cutoff parameter  [default: 0]
-  -t, --threshold FLOAT  threshold parameter. Enter none, one or several like:
-                         -t 5 -t 10
+  -t, --threshold FLOAT  Threshold parameter. Exlude all patients within
+                         threshold % of the pivot from analysis to get better
+                         group separation. Enter none, one or several like: -t
+                         5 -t 10
                          
                          It is advised for the user not to exceed a threshold
                          value of 20 since it is unlikely to gain any
@@ -78,12 +86,15 @@ Options:
                          exaggerated exclusion of patients. See man TREMSUCS
                          for further clarification of the threshold parameter
                          [default: 0]
-  -e, --execute TEXT     choose which pipeline shall be executed  [default:  
-                         DESeq2, metilene]  
-  -N, --dryrun           snakemake dryrun  
-  -D, --download         if set, just download raw and meta data for given  
-                         projects and analysis types, revise them, link them,  
-                         but do not run any analysis  
-  -v, --version          printing out version information: Version 1.0  
-  --help                 Show this message and exit.  
+  -e, --execute TEXT     choose which pipeline shall be executed  [default:
+                         DESeq2, metilene]
+  -N, --dryrun           snakemake dryrun
+  -D, --download         if set, just download raw and meta data for given
+                         projects and analysis types, revise them, link them,
+                         but do not run any analysis
+  -u, --unlock           in case the analysis crashs, snakemake locks the
+                         output directory, run with -u to unlock, then repeat
+                         the analysis
+  -v, --version          printing out version information: Version 1.0
+  --help                 Show this message and exit.
 ```
